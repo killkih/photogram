@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Posts", type: :request do
-
-  describe "GET /index" do
+RSpec.describe PostsController, type: :controller do
+  describe 'GET /index' do
     let(:posts) { create_list(:post, 3) }
 
     before { get :index }
 
-    it 'populates an array of all questions' do
+    it 'populates an array of all posts' do
       expect(assigns(:posts)).to match_array(posts)
     end
 
