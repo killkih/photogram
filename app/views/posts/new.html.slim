@@ -1,0 +1,12 @@
+= render 'shared/errors', resource: @post
+
+= form_with model: @post, local: true do |f|
+  p
+    = f.label :content
+    br
+    = f.text_field :content
+  p
+    = f.label :body
+    br
+    = f.text_area :body
+  p= f.submit 'Post', class: 'btn btn-primary'

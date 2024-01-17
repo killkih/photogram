@@ -16,4 +16,42 @@ RSpec.describe PostsController, type: :controller do
       expect(response).to render_template :index
     end
   end
+
+  describe 'GET #new' do
+    before { get :new }
+
+    it 'assigns a new Post to @post' do
+      expect(assigns(:post)).to be_a_new(Post)
+    end
+
+    it 'renders new view' do
+      expect(response).to render_template :new
+    end
+  end
+
+  describe 'POST #create' do
+
+    context 'with valid attributes' do
+      it 'saves a new post in the database' do
+        expect { post :create, params: { post: attributes_for(:post) } }.to change(Post, :count).by(1)
+      end
+
+      it 'redirects to index view' do
+        post :create, params: { post: attributes_for(:post) }
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context 'with invalid attributes' do
+      it 'does not save the post' do
+        expect do
+          post :create, params: { post: attributes_for(:post, :invalid) }
+        end.to_not change(Post, :count)
+      end
+      it 're-renders new view' do
+        post :create, params: { post: attributes_for(:post, :invalid) }
+        expect(response).to render_template :new
+      end
+    end
+  end
 end
