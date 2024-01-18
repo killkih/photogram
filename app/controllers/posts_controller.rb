@@ -4,6 +4,10 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def show
+    get_post
+  end
+
   def new
     @post = Post.new
   end
@@ -19,7 +23,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    post.destroy
+    get_post.destroy
     redirect_to root_path, notice: 'Post successfully deleted!'
   end
 
@@ -29,7 +33,7 @@ class PostsController < ApplicationController
     params.require(:post).permit(:content, :body)
   end
 
-  def post
+  def get_post
     @post ||= params[:id] ? Post.find(params[:id]) : Post.new
   end
 
