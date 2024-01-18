@@ -54,4 +54,17 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
+
+  describe 'DELETE #destroy' do
+    let!(:post) { create(:post) }
+
+    it 'delete the post' do
+      expect { delete :destroy, params: { id: post } }.to change(Post, :count).by(-1)
+    end
+
+    it 'redirects to index' do
+      delete :destroy, params: { id: post }
+      expect(response).to redirect_to root_path
+    end
+  end
 end
