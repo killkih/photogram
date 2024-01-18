@@ -3,6 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
+
+  let(:first_post) { create(:post) }
+
   describe 'GET /index' do
     let(:posts) { create_list(:post, 3) }
 
@@ -52,6 +55,17 @@ RSpec.describe PostsController, type: :controller do
         post :create, params: { post: attributes_for(:post, :invalid) }
         expect(response).to render_template :new
       end
+    end
+  end
+
+  describe 'GET #show' do
+    before { get :show, params: { id: first_post } }
+    it 'assigns the requested Post to @post' do
+      expect(assigns(:post)).to eq first_post
+    end
+
+    it 'renders show view' do
+      expect(response).to render_template :show
     end
   end
 

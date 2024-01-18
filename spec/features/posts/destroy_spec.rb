@@ -12,7 +12,7 @@ feature 'Author can destroy his post', "
 
   scenario 'Author tries to destroy his post' do
 
-    visit root_path
+    visit post_path(post)
     click_on 'Delete'
 
     expect(page).to have_content 'Post successfully deleted!'
