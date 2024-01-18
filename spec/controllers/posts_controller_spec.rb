@@ -81,4 +81,39 @@ RSpec.describe PostsController, type: :controller do
       expect(response).to redirect_to root_path
     end
   end
+
+  describe 'GET #edit' do
+    before { get :edit, params: { id: first_post } }
+
+    it 'renders edit view' do
+      expect(response).to render_template :edit
+    end
+  end
+
+  describe 'PATCH #update' do
+
+    context 'with valid attributes' do
+      it 'assigns the requested Post to @post' do
+        patch :update, params: { id: first_post, post: attributes_for(:post) }
+        expect(assigns(:post)).to eq first_post
+      end
+
+      it 'changes post attributes' do
+        patch :update, params: { id: first_post, post: { body: 'new body' } }
+        first_post.reload
+
+        expect(first_post.body).to eq 'new body'
+      end
+    end
+
+    context 'with invalid attributes' do
+      before { patch :update, params: { id: first_post, post: attributes_for(:post, :invalid) } }
+
+      it 'does not change post' do
+        first_post.reload
+
+        expect(first_post.body).to eq 'MyString'
+      end
+    end
+  end
 end

@@ -1,5 +1,4 @@
-div class="row justify-content-center"
-  div class="col col-md-10"
-    = render @post
+= render @post
 
-    = button_to "Delete", post_path(@post), method: :delete, class: 'btn btn-primary'
+= link_to "Edit", edit_post_path(@post), class: "btn btn-primary me-3"
+= link_to "Delete", post_path(@post), method: :delete, class: 'btn btn-primary'
