@@ -1,16 +1,14 @@
 class PostsController < ApplicationController
 
+  before_action :set_post, except: :index
+
   def index
     @posts = Post.all
   end
 
-  def show
-    get_post
-  end
+  def show; end
 
-  def new
-    @post = Post.new
-  end
+  def new; end
 
   def create
     @post = Post.new(post_params)
@@ -22,8 +20,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    if @post.update(post_params)
+      redirect_to root_path, notice: 'Post successfully updated!'
+    else
+      render :edit
+    end
+  end
+
   def destroy
-    get_post.destroy
+    @post.destroy
     redirect_to root_path, notice: 'Post successfully deleted!'
   end
 
@@ -33,8 +41,7 @@ class PostsController < ApplicationController
     params.require(:post).permit(:content, :body)
   end
 
-  def get_post
+  def set_post
     @post ||= params[:id] ? Post.find(params[:id]) : Post.new
   end
-
 end
