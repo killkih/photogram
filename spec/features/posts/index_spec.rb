@@ -7,11 +7,19 @@ feature 'User can view the list of posts', "
   As an authenticated user
   I'd like to view a list of posts
 " do
+
+  given(:user) { create(:user) }
   given!(:posts) { create_list(:post, 5) }
 
-  scenario 'User views the list of posts' do
-    visit root_path
+  background { visit root_path }
 
+  scenario 'Authenticated user views the list of posts' do
+    sign_in user
+
+    expect(page).to have_content posts[1].body
+  end
+
+  scenario 'Unauthenticated user views the list of posts' do
     expect(page).to have_content posts[1].body
   end
 end

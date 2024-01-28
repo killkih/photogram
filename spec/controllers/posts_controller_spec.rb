@@ -4,7 +4,8 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
 
-  let(:first_post) { create(:post) }
+  let(:user) { create(:user) }
+  let(:first_post) { create(:post, user: user) }
 
   describe 'GET /index' do
     let(:posts) { create_list(:post, 3) }
@@ -21,7 +22,10 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'GET #new' do
-    before { get :new }
+    before do
+      login(user)
+      get :new
+    end
 
     it 'assigns a new Post to @post' do
       expect(assigns(:post)).to be_a_new(Post)
@@ -33,6 +37,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'POST #create' do
+    before { login(user) }
 
     context 'with valid attributes' do
       it 'saves a new post in the database' do
@@ -60,6 +65,7 @@ RSpec.describe PostsController, type: :controller do
 
   describe 'GET #show' do
     before { get :show, params: { id: first_post } }
+
     it 'assigns the requested Post to @post' do
       expect(assigns(:post)).to eq first_post
     end
@@ -70,6 +76,8 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
+    before { login(user) }
+
     let!(:post) { create(:post) }
 
     it 'delete the post' do
@@ -83,6 +91,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'GET #edit' do
+    before { login(user) }
     before { get :edit, params: { id: first_post } }
 
     it 'renders edit view' do
@@ -91,6 +100,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe 'PATCH #update' do
+    before { login(user) }
 
     context 'with valid attributes' do
       it 'assigns the requested Post to @post' do
