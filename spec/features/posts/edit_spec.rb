@@ -7,7 +7,6 @@ feature 'User can edit his post', "
   As an author of post
   I'd like to be able to edit my post
 " do
-
   given(:user) { create(:user) }
   given(:other_user) { create(:user) }
   given!(:post) { create(:post, user: user) }

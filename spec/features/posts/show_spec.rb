@@ -7,7 +7,6 @@ feature 'The user can view the post', "
   As authenticated or unauthenticated user
   I'd like to see the post
 " do
-
   given(:user) { create(:user) }
   given(:post) { create(:post) }
 

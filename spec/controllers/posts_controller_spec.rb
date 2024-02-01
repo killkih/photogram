@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-
   let(:user) { create(:user) }
   let(:first_post) { create(:post, user: user) }
 

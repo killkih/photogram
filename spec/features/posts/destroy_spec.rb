@@ -7,7 +7,6 @@ feature 'Author can destroy his post', "
   As an author
   I'd like to be able to destroy my post
 " do
-
   given(:user) { create(:user) }
   given(:other_user) { create(:user) }
   given!(:post) { create(:post, user: user) }
