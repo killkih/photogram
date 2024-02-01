@@ -7,7 +7,6 @@ feature 'User can view the list of posts', "
   As an authenticated user
   I'd like to view a list of posts
 " do
-
   given(:user) { create(:user) }
   given!(:posts) { create_list(:post, 5) }
 
