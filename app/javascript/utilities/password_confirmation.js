@@ -22,17 +22,28 @@ function checkPasswords(inputPass, inputConfPass) {
 }
 
 function validPass(pass, confPass) {
-    if (confPass.value == '') {
-        clearClass(confPass)
-        return
+    const shortPassAlert = document.querySelector('.short-pass-alert')
+
+    if (pass.value.length > 6){
+        shortPassAlert.classList.add('hidden')
     }
 
-    if (pass.value !== confPass.value){
+    if (confPass.value == '') {
+        clearClass(confPass)
+    }
+
+    if (pass.value !== confPass.value) {
         clearClass(confPass)
         confPass.classList.add('is-invalid')
     } else {
         clearClass(confPass)
         confPass.classList.add('is-valid')
+    }
+
+    if (pass.value.length < 6) {
+        clearClass(confPass)
+        confPass.classList.add('is-invalid')
+        shortPassAlert.classList.remove('hidden')
     }
 }
 
