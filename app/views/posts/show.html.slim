@@ -1,5 +1,5 @@
 = render @post
 
 - if @post.user == current_user
-  = link_to "Edit", edit_post_path(@post), class: "btn btn-primary "
+  = link_to "Edit", edit_post_path(@post), class: "btn btn-primary mb-2 "
   = button_to "Delete", post_path(@post), method: :delete, class: 'btn btn-primary'

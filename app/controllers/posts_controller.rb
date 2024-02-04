@@ -2,7 +2,7 @@
 
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :set_post, except: :index
+  before_action :set_post!, except: :index
 
   def index
     @posts = Post.all
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
     params.require(:post).permit(:content, :body)
   end
 
-  def set_post
+  def set_post!
     @post ||= params[:id] ? Post.find(params[:id]) : Post.new
   end
 end

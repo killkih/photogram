@@ -37,6 +37,10 @@ RSpec.configure do |config|
   config.include ControllerHelpers, type: :controller
   config.include FeatureHelpers, type: :feature
 
+  Webdrivers::Chromedriver.required_version = '121.0.6167.139'
+  Capybara.javascript_driver = :selenium_chrome_headless
+  Capybara.default_max_wait_time = 10
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
