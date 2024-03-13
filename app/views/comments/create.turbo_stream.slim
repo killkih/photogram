@@ -1,0 +1,6 @@
+- if @comment.persisted?
+  = turbo_stream.update 'comment-form' do
+    = render 'comments/form'
+
+  = turbo_stream.update 'comments' do
+    = render @post.comments.sort_by_date

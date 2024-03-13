@@ -1,0 +1,9 @@
+- if current_user
+  .comment-form
+    = form_with url: post_comments_path(@post), local: false do |f|
+      div class="form-group"
+        p
+          = f.label :body, 'Comment'
+          br
+          = f.text_field :body, class: 'form-control'
+        p= f.submit 'Comment', class: 'btn btn-primary'

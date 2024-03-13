@@ -1,0 +1,10 @@
+= image_tag post.content
+
+p= post.body
+
+.comments
+  = turbo_frame_tag 'comments' do
+    = render post.comments.sort_by_date
+
+= turbo_frame_tag 'comment-form' do
+  = render 'comments/form'

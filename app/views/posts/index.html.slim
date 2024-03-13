@@ -1,0 +1,7 @@
+h2 Posts:
+
+- @posts.sort_by_date.each do |n|
+      = image_tag n.content
+      p= n.body
+      = link_to 'View', post_path(n), remote: true, class: "btn btn-primary"
+      br
