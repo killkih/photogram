@@ -1,0 +1,4 @@
+h1 Your friends:
+- @friendships.each do |friendship|
+  p
+    = link_to "#{friendship.friend.nickname}", profile_path(friendship.friend)

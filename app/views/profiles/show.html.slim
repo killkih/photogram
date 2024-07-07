@@ -15,6 +15,9 @@ p
     = @user.bio
     br
 
+  - if current_user.present? && @user != current_user && !current_user.friends.include?(@user)
+    = button_to 'Subscribe', subscribe_profile_path(@user.id), method: :post, remote: true, class: 'btn btn-primary'
+
 p Your Posts:
 
 - @user.posts.sort_by_date.each do |n|
