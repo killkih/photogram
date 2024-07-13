@@ -13,8 +13,8 @@ feature 'User can subscribe to other user', "
   given(:friend) { create(:user) }
   given!(:friendship) { create(:friendship, user: user, friend: friend) }
 
-  describe 'Authenticated user' do
-    background {sign_in user}
+  context 'Authenticated user' do
+    background { sign_in user }
 
     scenario 'subscribe to user' do
       visit profile_path(other_user)
@@ -22,7 +22,7 @@ feature 'User can subscribe to other user', "
       click_on 'Subscribe'
 
       expect(page).to_not have_button 'Subscribe'
-      expect(page).to have_content 'You have successfully subscribed!'
+      expect(page).to have_content 'You have subscribed!'
     end
 
     scenario 'try to subscribe to friend' do
@@ -38,7 +38,7 @@ feature 'User can subscribe to other user', "
     end
   end
 
-  describe 'Unauthenticated user' do
+  context 'Unauthenticated user' do
     scenario 'try to subscribe' do
       visit profile_path(other_user)
 
