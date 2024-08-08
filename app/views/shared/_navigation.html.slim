@@ -1,0 +1,19 @@
+.navbar.navbar-expand-lg.navbar-dark.bg-primary
+  .container.container-fluid
+    = link_to 'Photogram', root_path, class: 'navbar-brand'
+    .collapse.navbar-collapse#navbarSupportedContent
+      .navbar-nav.me-auto
+        - if user_signed_in?
+          li.nav-item
+            = link_to 'Profile', profile_path(current_user), class: 'nav-link'
+          li.nav-item
+            = link_to 'Friends', friends_path, class: 'nav-link'
+      .navbar-nav.ms-auto
+        - if user_signed_in?
+          li.nav-item
+            = button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link btn btn-link'
+        - else
+          li.nav-item
+            = link_to 'Sign in', new_user_session_path, class: 'nav-link'
+          li.nav-item
+            = link_to 'Sign up', new_user_registration_path, class: 'nav-link'
